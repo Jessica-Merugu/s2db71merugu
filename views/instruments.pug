@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}. My name is Jessica Salome
+  - let items = results
+  div(class="container-fluid")
+    div(class="row")
+      each instruments, index in items
+        div(class="col-sm-2" onclick=`buy(${index+1})`) #{instruments.instrument_name} - #{instruments.instrument_size} - $#{instruments.instrument_cost}
+  
+  script.
+    function buy(index){
+      alert(`You purchased item ${index}`);
+    }
