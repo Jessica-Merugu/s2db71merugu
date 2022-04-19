@@ -10,6 +10,7 @@ exports.instrument_list = async function (req, res) {
         res.send(`{"error": ${err}}`);
     }
 };
+
 // for a specific instrument.
 exports.instrument_detail = async function (req, res) {
     console.log("detail" + req.params.id)
@@ -21,10 +22,22 @@ exports.instrument_detail = async function (req, res) {
         res.send(`{"error": document for id ${req.params.id} not found`);
     }
 };
+
+// for a specific Costume. 
+exports.Instrument_detail = async function(req, res) { 
+    console.log("detail"  + req.params.id) 
+    try { 
+        result = await Instrument.findById( req.params.id) 
+        res.send(result) 
+    } catch (error) { 
+        res.status(500) 
+        res.send(`{"error": document for id ${req.params.id} not found`); 
+    } 
+}; 
 // Handle Instrument create on POST.
-exports.instrument_create_post = async function (req, res) {
-    console.log(req.body)
-    let document = new Instrument();
+//exports.instrument_create_post = async function (req, res) {
+  //  console.log(req.body)
+    //let document = new Instrument();
     // We are looking for a body, since POST does not have query parameters.
     // Even though bodies can be in many different formats, we will be picky
     // and require that it be a json object
@@ -45,6 +58,8 @@ exports.instrument_create_post = async function (req, res) {
 exports.instrument_delete = function (req, res) {
     res.send('NOT IMPLEMENTED: Instrument delete DELETE ' + req.params.id);
 };
+
+
 // Handle instrument update form on PUT.
 exports.instrument_update_put = async function (req, res) {
     console.log(`update on id ${req.params.id} with body
